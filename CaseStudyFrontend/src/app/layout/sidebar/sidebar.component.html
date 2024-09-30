@@ -1,0 +1,12 @@
+
+<div class="sidebar">
+<button routerLink="dashboard">Dashboard</button>
+@if(admin){
+    <button routerLink="pages">Employees</button>
+}
+@else {
+    <button routerLink="pages">Tasks</button>
+    <button routerLink="response">Response</button>
+}
+<button routerLink="profile">Profile</button>
+</div>

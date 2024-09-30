@@ -1,0 +1,33 @@
+.notification {
+    color:black;
+    background-color: gray;
+    height: 50px;
+    padding: 5px;
+    margin: 5px;
+    border: 3px rgb(63, 62, 62) solid;
+    border-radius: 10%;
+    display: flex;
+}
+
+.ntf {
+    position: fixed;
+    top: 80px;
+    right: 600px;
+    background-color: white;
+}
+
+.backdrop {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+.cross {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.cross:hover{
+    background-color: lightgray;
+    cursor: pointer;
+    text-align: center;
+}

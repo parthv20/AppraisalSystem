@@ -1,0 +1,29 @@
+.parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height of the viewport */
+    background-color: #f4f4f9; /* Light background color */
+  }
+  
+  .name {
+    background-color: #ffffff; /* White background for the text container */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px 40px; /* Spacing inside the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .name h1 {
+    font-size: 2.5rem; /* Large font size */
+    font-weight: 600;  /* Semi-bold text */
+    color: #333333;    /* Dark text color */
+    margin: 0;         /* Remove margin around the heading */
+    text-align: center; /* Center text */
+  }
+  
+  @media (max-width: 768px) {
+    .name h1 {
+      font-size: 1.75rem; /* Adjust font size for smaller screens */
+    }
+  }
+  

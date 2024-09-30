@@ -1,0 +1,32 @@
+<div class="main">
+  <div class="navbar">
+    <div class="sidebarlogo">
+      <div class="logo">
+        <button>
+          <img
+            src="https://beesheetsv2.beehyv.com/assets/images/logo.png"
+            alt="beesheets-logo"
+          />
+        </button>
+      </div>
+    </div>
+
+    <div class="navbar-buttons">
+      <button class="notification-btn" (click)="seenotifications()">
+        <img src="notifications.svg" alt="notifications" />
+      </button>
+
+      <!-- Notification logic -->
+      @if(ntfs()) {
+        <div class="backdrop" (click)="closentfs()"></div>
+        <app-notification />
+      }
+
+      <a [routerLink]="['/login']" class="logout-btn" (click)="logout()">
+        <img width="40px" src="logout.svg" alt="logout" />
+      </a>
+    </div>
+  </div>
+</div>
+
+

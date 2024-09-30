@@ -1,0 +1,36 @@
+<!-- @for (user of users(); track $index) {
+    {{user.name}}
+    {{user.designation}}
+    {{user.email}}
+    {{user.phoneNumber}}
+
+} -->
+
+
+
+<div class="grid">
+    @for (user of users(); track $index) {
+    <div class="employee-card">
+      <div class="card-header">
+        <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png" alt="Employee Photo" class="profile-image" />
+      </div>
+      <div class="card-body">
+        <h2 class="employee-name">{{user.name }}</h2>
+        <p class="employee-id">Emp id: {{ user.id }}</p>
+        <p class="employee-position">Designation: {{ user.designation }}</p>
+        <p class="employee-contact">Email: {{ user.email }}</p>
+        <p class="employee-contact">
+          Contact Number: {{ user.phoneNumber }}
+        </p>
+      </div>
+      <div class="card-footer">
+        <button class="task-button" [routerLink]="['tasks',user.id]">
+          Rate Tasks
+        </button>
+        <button class="task-button" [routerLink]="['attributes',user.id]">
+            Rate Attributes
+          </button>
+      </div>
+    </div>
+    }
+  </div>

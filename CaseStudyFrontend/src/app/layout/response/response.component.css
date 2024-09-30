@@ -1,0 +1,21 @@
+.attributes-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    margin-left: 90px; /* Optional: adjust as needed */
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    display: table-cell;
+    padding: 10px;
+    border: 1px solid #a7ddf5; /* Adjust border color */
+    text-align: left; /* Align text as needed */
+}
+
+.table-cell strong {
+    color: #333; /* Change color for the strong text */
+}

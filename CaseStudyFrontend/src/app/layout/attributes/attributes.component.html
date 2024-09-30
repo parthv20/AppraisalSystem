@@ -1,0 +1,37 @@
+<!-- @for (attribute of attributes; track $index) {
+    {{attribute}} - 
+    <input [(ngModel)]="user()[0].attributes[attribute]" >
+}
+
+<button (click)="submitratings()">Submit</button> -->
+
+
+<h2 style="width: 100%;text-align: center; padding:40px">Rate Attributes</h2>
+
+<div class="rating-container" style="display: flex; flex-direction: column; align-items: center;">
+<div *ngFor="let attribute of attributes; let i = index" class="rating-item" style="width:40%;display:flex; border: solid black 1px;padding: 5px;" >
+      <label class="rating-label" style="font-size: 30px;">{{ attribute }}</label>
+      <div style="display: flex; justify-content: right ;width: 100%;">
+
+          <input type="number" min="1" max="10" [(ngModel)]="user()[0].attributes[attribute]" class="rating-input" style="width: 180px; font-size: 30px;">
+      </div>
+      <br/>
+    </div>
+    <button (click)="submitratings()" style="width: 40%;" class="btn btn-primary">Submit</button>
+  </div>
+
+  <!-- <div class="rating-container">
+    <div class="column">
+      <div *ngFor="let attribute of column1Attributes" class="rating-item">
+        <label class="rating-label">{{ attribute }}</label>
+        <input type="number" min="1" max="10" [(ngModel)]="user[0].attributes[attribute]" class="rating-input">
+      </div>
+    </div>
+    <div class="column">
+      <div *ngFor="let attribute of column2Attributes" class="rating-item">
+        <label class="rating-label">{{ attribute }}</label>
+        <input type="number" min="1" max="10" [(ngModel)]="user[0].attributes[attribute]" class="rating-input">
+      </div>
+    </div>
+  </div>
+  <button (click)="submitratings()">Submit</button> -->

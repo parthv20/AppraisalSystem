@@ -1,0 +1,8 @@
+<div class="ntf">
+@for (notification  of adminnts(); track $index) {
+        <div class="notification">
+            <div>{{notification.employeeName}} ({{notification.employeeId}}) has added their tasks</div>
+             <span class="cross" (click)="deletenotification(notification)">X</span>
+        </div>
+}
+</div>

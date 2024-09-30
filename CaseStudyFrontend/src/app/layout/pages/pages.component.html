@@ -1,0 +1,21 @@
+@if(!admin){
+    <button class=" btn-primary"(click)="createtask()"> Add Projects </button>
+
+    @if(user().notifyByemployee){
+        <button class=" btn-primary"> Notified,You can't </button>
+    }@else {
+        <button class=" btn-primary"(click)="notify()"> Notify </button>
+    }
+    @if(create){
+        <app-createtask (close)="closecreate()"/>
+    }
+    @if(!(user().notifybyadmin)){
+        <div class="">You are Rated</div>
+    }
+    @for (task of user().tasks; track $index) {
+        <app-employee-tasks [task]="task"/>
+    }
+}
+@else{
+<app-employeelist/>
+}

@@ -1,0 +1,54 @@
+<div class="backdrop" (click)="closetask()"></div>
+<div class="main">
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Projects</h5>
+        <span class="close-btn" (click)="closetask()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form  class="task-form">
+          
+          <div class="mb-3">
+            <label for="projectName" class="form-label">Project Name</label>
+            <input type="text" class="form-control" id="projectName" placeholder="project name...." [(ngModel)]="task().name" name="projectName" required>
+          </div>
+  
+          
+          <div class="mb-3">
+            <label for="projectDescription" class="form-label">Project Description</label>
+            <input type="text" class="form-control" id="projectDescription" placeholder="which area you worked....." [(ngModel)]="task().description" name="projectDescription" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDate" [(ngModel)]="task().startDate" name="startDate" required>
+          </div>
+          
+         
+          <div class="mb-3">
+            <label for="endDate" class="form-label">End Date</label>
+            <input type="date" class="form-control" id="endDate" [(ngModel)]="task().endDate" name="endDate" required>
+          </div>
+  
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="appraisable" [(ngModel)]="task().appraisable" name="appraisable">
+            <label class="form-check-label" for="appraisable">
+              Appraisable
+            </label>
+          </div>
+  
+          
+    <div class="form-buttons">
+        <button type="button" class="cancel-btn" (click)="closetask()">
+          Cancel
+        </button>
+        <button type="submit" class="submit-btn" (click)="submittask()">
+          Submit
+        </button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
