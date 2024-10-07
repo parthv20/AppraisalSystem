@@ -26,12 +26,17 @@ export class CreatetaskComponent {
 
   ngOnInit(): void {
     this.pageservice.getuser().subscribe(data=>this.user.set(data))
-    console.log(this.task())
   }
 
   submittask() {
-    this.pageservice.savetask(this.task(),this.user()).subscribe()
-    this.closetask()
+    this.pageservice.savetask(this.task(),this.user()).subscribe({
+      next:data=>{
+        this.close.emit(this.task());
+      },
+      error:err=>{
+        alert('error')
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -39,9 +44,8 @@ export class CreatetaskComponent {
       this.subscription.unsubscribe();
     }
   }
-
+  
   closetask() {
     this.close.emit();
   }
-
 }

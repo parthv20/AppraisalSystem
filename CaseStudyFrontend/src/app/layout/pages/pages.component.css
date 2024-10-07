@@ -1,0 +1,85 @@
+/* General button styles */
+.btn-primary {
+    background-color: #6b46c1; /* Purple background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Spacing inside button */
+    font-size: 16px; /* Text size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Show pointer cursor */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 10px; /* Spacing around buttons */
+    display: inline-block;
+  }
+
+  .btns {
+    position: relative;
+  }
+  
+  .ntfy {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+  }
+
+
+  
+  .btn-primary:hover {
+    background-color: #805ad5; /* Darker purple on hover */
+    transform: translateY(-2px); /* Slight movement upwards on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+  
+  .btn-primary:disabled {
+    background-color: #d3d3d3; /* Gray background for disabled state */
+    cursor: not-allowed; /* Show disabled cursor */
+    opacity: 0.6;
+  }
+  
+  /* Notification message */
+  .notification-message {
+    color: #e53e3e; /* Red text to indicate warning or notice */
+    background-color: #fff5f5; /* Light red background */
+    padding: 10px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #fed7d7; /* Border to make it stand out */
+    margin: 15px 0; /* Spacing above and below the message */
+    text-align: center; /* Center the text */
+    font-weight: 600; /* Bold text */
+  }
+  
+  /* Success message when user is rated */
+  .success-message {
+    color: #38a169; /* Green text for success */
+    background-color: #f0fff4; /* Light green background */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #c6f6d5; /* Border for better visibility */
+    margin: 15px 0;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  /* Task list container */
+  .task-list {
+    margin-top: 20px; /* Space above the task list */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between tasks */
+  }
+  
+  /* Individual task component */
+  .app-employee-tasks {
+    padding: 15px;
+    background-color: #edf2f7; /* Light gray background for tasks */
+    border-radius: 8px; /* Rounded corners for tasks */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+  
+  /* Style for task when hovered */
+  .app-employee-tasks:hover {
+    background-color: #e2e8f0; /* Darker gray on hover */
+    transform: translateY(-2px); /* Move slightly upwards */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  

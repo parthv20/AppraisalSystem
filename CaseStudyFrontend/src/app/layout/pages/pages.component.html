@@ -1,20 +1,39 @@
 @if(!admin){
-    <button class=" btn-primary"(click)="createtask()"> Add Projects </button>
-
-    @if(user().notifyByemployee){
-        <button class=" btn-primary"> Notified,You can't </button>
-    }@else {
-        <button class=" btn-primary"(click)="notify()"> Notify </button>
-    }
-    @if(create){
-        <app-createtask (close)="closecreate()"/>
-    }
-    @if(!(user().notifybyadmin)){
-        <div class="">You are Rated</div>
-    }
-    @for (task of user().tasks; track $index) {
-        <app-employee-tasks [task]="task"/>
-    }
+    <div class="task-container">
+        <!-- Add Projects Button -->
+         <div class="btns">
+            <button class="btn-primary" (click)="createtask()" [disabled]="user().notifyByemployee"> Add Projects </button>
+        
+            <!-- Conditional Notification Buttons -->
+             <div class="ntfy">
+                <ng-container *ngIf="user().notifyByemployee; else elseNotify">
+                <button class="btn-primary" disabled> Notified, You can't </button>
+                </ng-container>
+                <ng-template #elseNotify>
+                <button class="btn-primary" (click)="notify()"> Notify </button>
+                </ng-template>
+            </div>
+        </div>
+      
+        <!-- Create Task Component (if open) -->
+        <ng-container *ngIf="create">
+          <app-createtask (close)="closecreate($event)"></app-createtask>
+        </ng-container>
+      
+        <!-- Success Message when user is rated -->
+        <ng-container *ngIf="(user().noifybyadmin)">
+          <div class="success-message">You are Rated</div>
+        </ng-container>
+      
+        <!-- Task List -->
+        <div class="task-list">
+            @for (task of user().tasks; track $index) {
+          <ng-container >
+            <app-employee-tasks [task]="task"></app-employee-tasks>
+          </ng-container>}
+        </div>
+      </div>
+      
 }
 @else{
 <app-employeelist/>

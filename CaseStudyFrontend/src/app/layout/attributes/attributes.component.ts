@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PageService } from '../pages/page.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-attributes',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,RouterLink],
   templateUrl: './attributes.component.html',
   styleUrl: './attributes.component.css'
 })
@@ -20,7 +20,7 @@ export class AttributesComponent implements OnInit {
 
   submitratings(){
       this.pageservice.updateattribute(this.user()[0],this.user()[0].attributes).subscribe()
-      this.user()[0].notifybyadmin = true;
+      this.user()[0].noifybyadmin = true;
       this.pageservice.notifybyadmin(this.user()[0]).subscribe()
   }
   ngOnInit(): void {

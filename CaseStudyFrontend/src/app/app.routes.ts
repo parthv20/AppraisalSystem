@@ -7,6 +7,7 @@ import { ProfileComponent } from './layout/profile/profile.component';
 import { PagesComponent } from './layout/pages/pages.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { ResponseComponent } from './layout/response/response.component';
+import { SignupComponent } from './Authentication/signup/signup.component';
 
 export const routes: Routes = [
 
@@ -18,11 +19,20 @@ export const routes: Routes = [
    {
     path:'login',
     component: LoginComponent,
+   },   {
+    path:'signup',
+    component: SignupComponent,
    },{
     path:'layout',
     component: LayoutComponent,
     children:[
         {
+            path:'',
+            redirectTo :'dashboard',
+            pathMatch: 'full'
+        },
+        
+        { 
             path: 'dashboard',
             component: DashboardComponent,
         },

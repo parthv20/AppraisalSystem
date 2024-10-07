@@ -10,9 +10,13 @@
         </button>
       </div>
     </div>
-
+  
+    <div class="notification-message" *ngIf="user().noifybyadmin">
+      <div class="success-message">You are Rated,See the responses!!</div>
+    </div>
     <div class="navbar-buttons">
       <button class="notification-btn" (click)="seenotifications()">
+        <span class="dot" *ngIf="ntfs()">•</span>
         <img src="notifications.svg" alt="notifications" />
       </button>
 

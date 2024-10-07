@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, inject, input, signal } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, destroyPlatform, inject, input, signal } from '@angular/core';
 import { PageService } from '../page.service';
-import { LayoutService } from '../../layout.service';
 import { DatePipe } from '@angular/common';
 import { CreatetaskComponent } from '../createtask/createtask.component';
 import { EdittaskComponent } from '../edittask/edittask.component';
@@ -17,6 +16,7 @@ export class EmployeeTasksComponent implements OnInit {
   task = input<any>(0);
   edit = false;
   user = signal<any>('')
+  deleted = signal<boolean>(false)
 
   ngOnInit(): void {
       this.pageservice.getuser().subscribe(data=>this.user.set(data))
@@ -31,6 +31,7 @@ export class EmployeeTasksComponent implements OnInit {
 
   ondelete() {
     this.pageservice.deletetask(this.task()).subscribe()
+    this.deleted.set(true)
   }
 
   show = false;

@@ -18,7 +18,7 @@
         </div>
         @if(task.appraisable){
             <div class="text-center">
-                <input type="number" min="1" max="10" [(ngModel)]="task.adminrating" >
+                <input type="number" min="1" max="10" [(ngModel)]="task.adminrating" [disabled]="user()[0].noifybyadmin">
             </div>
         }@else {
             Not appraisable
@@ -28,5 +28,5 @@
 </div>
 }
 <div class="d-flex justify-content-center ">
-    <button (click)="submitratings()" class="btn btn-primary w-50">Submit</button>
+    <button [routerLink]="['/layout/pages']" (click)="submitratings()" class="btn btn-primary w-50">Submit</button>
 </div>

@@ -47,45 +47,6 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private EmployeeDetailsDTO mapEmployeeWithSortedTasks(Employee employees) {
-        EmployeeDetailsDTO employeeDTO = this.modelMapper.map(employees, EmployeeDetailsDTO.class);
-
-        List<AppraisalTaskDTO> sortedTasks = employeeDTO.getTasks().stream()
-                .sorted(Comparator.comparingLong(AppraisalTaskDTO::getId))
-                .toList();
-
-        employeeDTO.setTasks(new ArrayList<>(sortedTasks));
-
-        return employeeDTO;
-    }
-
     public List<EmployeeDetailsDTO> searchEmployees(String s) {
         List<Employee> emp = employeeRepository.searchEmployee(s)
                 .stream()
@@ -153,7 +114,6 @@ public class EmployeeService {
             if (employee.getAttributes() != null) {
                 Attribute existingAttributes = employee.getAttributes();
                 modelMapper.map(attributeDTO, existingAttributes);
-                employeeRepository.save(employee);
                 return attributeDTO;
             } else {
 
@@ -167,5 +127,19 @@ public class EmployeeService {
         }else{
             throw new EntityNotFoundException("Employee Not found with Id : " + id);
         }
+    }
+
+
+
+    private EmployeeDetailsDTO mapEmployeeWithSortedTasks(Employee employees) {
+        EmployeeDetailsDTO employeeDTO = this.modelMapper.map(employees, EmployeeDetailsDTO.class);
+
+        List<AppraisalTaskDTO> sortedTasks = employeeDTO.getTasks().stream()
+                .sorted(Comparator.comparingLong(AppraisalTaskDTO::getId))
+                .toList();
+
+        employeeDTO.setTasks(new ArrayList<>(sortedTasks));
+
+        return employeeDTO;
     }
 }

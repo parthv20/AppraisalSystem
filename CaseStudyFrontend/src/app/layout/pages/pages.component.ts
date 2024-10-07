@@ -1,14 +1,15 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { EmployeeTasksComponent } from "./employee-tasks/employee-tasks.component";
-import { LayoutService } from '../layout.service';
+
 import { PageService } from './page.service';
 import { EmployeelistComponent } from "./employeelist/employeelist.component";
 import { CreatetaskComponent } from "./createtask/createtask.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pages',
   standalone: true,
-  imports: [EmployeeTasksComponent, EmployeelistComponent, CreatetaskComponent],
+  imports: [EmployeeTasksComponent, EmployeelistComponent, CreatetaskComponent,CommonModule],
   templateUrl: './pages.component.html',
   styleUrl: './pages.component.css'
 })
@@ -23,22 +24,34 @@ export class PagesComponent implements OnInit {
     if(ad){
       this.admin = JSON.parse(ad);
     }
-    console.log(this.user())
-      this.pageservice.getuser().subscribe(data=>{
-        this.user.set(data);
-        console.log(this.user())
-      })
+    this.getuser()
+  }
+
+  getuser(){
+    this.pageservice.getuser().subscribe(data=>{
+      this.user.set(data);
+      console.log(this.user())
+    })
   }
  notify(){
    this.user().notifybyemployee = true
    this.pageservice.notify(this.user()).subscribe()
 
  }
-  closecreate(){
+  closecreate(task:any){
+    if(task){
+      this.user().tasks = [...this.user().tasks, task]
+    }
     this.create = false
   }
 
   createtask(){
-    this.create = true
+    if(this.user().tenure < 12){
+      alert("You can't add projects")
+      
+    }else{
+      this.create = true
+    }
+   
   }
 }

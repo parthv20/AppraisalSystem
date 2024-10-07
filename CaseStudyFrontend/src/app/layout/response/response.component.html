@@ -1,38 +1,51 @@
 
-<h4   style="margin-top:  30px; margin-left: 90px;">Tasks Rating :</h4>
 
-@for (task of user().tasks; track $index) 
-{<div class="d-flex justify-content-center">
-    <div class="card shadow-sm my-3 w-75">
-        <div class="card-body d-flex justify-content-between align-items-center">
-        <div>
-            <p><strong>Project Name :</strong> {{ task.name }}</p>
-            <p><strong>Start Date :</strong> {{ task.startDate }}</p>
-            <p><strong>Description :</strong> {{ task.description }}</p>
-        </div>
-        
-        <div>
-            <p><strong>Appraisable :</strong> {{ task.appraisable ? 'Yes' : 'No' }}</p>
-            <p><strong>End Date :</strong> {{ task.endDate }}</p>
-          
-        </div>
-         Rating - {{task.adminrating}}
+@if(user().noifybyadmin){
+    
+    <h4   style="margin-top:  30px; margin-left: 90px;">Tasks Rating :</h4>
+    @for (task of user().tasks; track $index) 
+    {
+        @if(task.appraisable){
+        <div class="d-flex justify-content-center">
+        <div class="card shadow-sm my-3 w-75">
+            <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <p><strong>Project Name :</strong> {{ task.name }}</p>
+                <p><strong>Start Date :</strong> {{ task.startDate }}</p>
+                <p><strong>Description :</strong> {{ task.description }}</p>
+            </div>
+            
+            <div>
+                <p><strong>Appraisable :</strong> {{ task.appraisable ? 'Yes' : 'No' }}</p>
+                <p><strong>End Date :</strong> {{ task.endDate }}</p>
+              
+            </div>
+             Rating - {{task.adminrating}}
+            </div>
         </div>
     </div>
-</div>}
-
-<h4   style="margin-left: 90px;">Attributes Rating :</h4>
-
-
-<div class="attributes-table">
-    @for (attr of attributes; track $index) {
-        @if(user().attributes[attr]!=0){
-            <div class="table-row">
-                <div class="table-cell"><strong>{{attr}}</strong></div>
-                <div class="table-cell">{{user().attributes[attr]}}</div>
-            </div>
         }
     }
-</div>
+    <h4   style="margin-left: 90px;">Attributes Rating :</h4>
+
+
+    <div class="attributes-table">
+        @for (attr of attributes; track $index) {
+            @if(user().attributes[attr]!=0){
+                <div class="table-row">
+                    <div class="table-cell"><strong>{{attr}}</strong></div>
+                    <div class="table-cell">{{user().attributes[attr]}}</div>
+                </div>
+            }
+        }
+    </div>
+
+}
+    @else {<div class="rate"> <h4 >Waiting for admin to rate....</h4></div>
+       
+    }
+
+
+
 
 

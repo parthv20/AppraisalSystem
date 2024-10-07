@@ -16,7 +16,7 @@ export class EmployeelistComponent implements OnInit {
 
   ngOnInit(): void {
       this.pageservice.getallusers().subscribe(data=>{
-        this.users.set(data);
+        this.users.set(data.filter((usr:any) => usr.tenure>=12));
         console.log(this.users())
       })
   }

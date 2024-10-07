@@ -20,6 +20,14 @@ export class PageService {
     });
     return headers;
   }
+   signupuser(user:any){
+
+    const headers = this.getheaders()
+  
+    return this.http.post(
+       'http://localhost:8080/signup',user,{headers}
+    )
+   }
 
   getuser() {
     const headers = this.getheaders()

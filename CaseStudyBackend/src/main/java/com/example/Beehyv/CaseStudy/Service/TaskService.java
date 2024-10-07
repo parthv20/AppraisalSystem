@@ -15,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 
@@ -69,7 +66,9 @@ public class TaskService {
             Employee emp= addtaskemployee.get();
 
             task.setEmployee(emp);
-            emp.getTasks().add(task);
+            Set<AppraisalTask> tasks  = emp.getTasks();
+            tasks.add(task);
+            emp.setTasks(tasks);
             Employee savedEmployee = employeeRepository.save(emp);
 
             return modelMapper.map(task,AddTaskDTO.class);
@@ -91,11 +90,11 @@ public class TaskService {
                 task.setDescription(appraisalTaskDTO.getDescription());
             }
 
-            if(Objects.nonNull(appraisalTaskDTO.getStartDate()) && appraisalTaskDTO.getStartDate() != null){
+            if(Objects.nonNull(appraisalTaskDTO.getStartDate())){
                 task.setStartDate(appraisalTaskDTO.getStartDate());
             }
 
-            if(Objects.nonNull(appraisalTaskDTO.getEndDate()) && appraisalTaskDTO.getEndDate() != null){
+            if(Objects.nonNull(appraisalTaskDTO.getEndDate())){
                 task.setEndDate(appraisalTaskDTO.getEndDate());
             }
 

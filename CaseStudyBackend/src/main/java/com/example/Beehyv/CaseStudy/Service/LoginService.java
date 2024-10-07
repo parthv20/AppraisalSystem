@@ -33,22 +33,6 @@ public class LoginService {
         String email = loginDTO.getEmail();
         String password = loginDTO.getPassword();
         System.out.println(email + "  " + password);
-
-//        Optional<Optional<Employees>> empOptional = Optional.ofNullable(employeeRepository.findByEmail(email));
-//
-//        if (empOptional.isPresent()) {
-//            Optional<Employees> emp = empOptional.get();
-//            if (emp.getEmail().equals(email) && passwordEncoder.matches(password,emp.getPassword())) {
-//                LoginResponseDTO loginResponseDTO = modelMapper.map(emp, LoginResponseDTO.class);
-//                loginResponseDTO.setMessage("success");
-//                loginResponseDTO.setStatus((long) HttpStatus.FOUND.value());
-//                return loginResponseDTO;
-//            } else {
-//               throw new UserNotFoundException("Invalid Password");
-//            }
-//        } else {
-//            throw new UserNotFoundException("user Not Found");
-//        }
         var authToken = new UsernamePasswordAuthenticationToken(email, password);
         var authenticate = authenticationManager.authenticate(authToken);
 
