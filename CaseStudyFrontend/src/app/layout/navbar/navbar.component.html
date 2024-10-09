@@ -16,8 +16,7 @@
     </div>
     <div class="navbar-buttons">
       <button class="notification-btn" (click)="seenotifications()">
-        <span class="dot" *ngIf="ntfs()">•</span>
-        <img src="notifications.svg" alt="notifications" />
+        <img src="notifications.svg" alt="notifications" /><span>{{len()}}</span>
       </button>
 
       <!-- Notification logic -->

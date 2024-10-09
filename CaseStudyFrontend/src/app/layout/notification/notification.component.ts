@@ -22,6 +22,11 @@ export class NotificationComponent implements OnInit {
     }
   }
   deletenotification(notification:any){
-    this.pageservice.deletenotification(notification).subscribe()
+    this.pageservice.deletenotification(notification).subscribe(
+      data=>{
+        this.pageservice.getnotifications().subscribe(data=>this.adminnts.set(data))
+      }
+    )
+    
   }
 }

@@ -15,16 +15,20 @@ import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var appUser =  employeeRepository.findByEmail(username)
-                .orElseThrow(()-> new EntityNotFoundException("Email not found"));
 
-       // System.out.println(List.of(new SimpleGrantedAuthority(appUser.isAdmin() ? "ADMIN":"Employee")));
-//        List.of(new SimpleGrantedAuthority(appUser.isAdmin() ? "ADMIN":"Employee"))
-        return new User(appUser.getEmail(), appUser.getPassword(), List.of(new SimpleGrantedAuthority(appUser.isAdmin() ? "ADMIN":"Employee")));
+        var appUser = employeeRepository.findByEmail(username)
+                .orElseThrow(() -> new EntityNotFoundException("Email not found"));
+
+
+        // - A list of granted authorities, where the user is assigned either the "ADMIN" or "Employee" role
+        return new User(appUser.getEmail(), appUser.getPassword(),
+                List.of(new SimpleGrantedAuthority(appUser.isAdmin() ? "ADMIN" : "Employee")));
     }
 }

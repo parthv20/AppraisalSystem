@@ -26,12 +26,6 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-
-    //    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.csrf(AbstractHttpConfigurer::disable).authorizeRequests().anyRequest().permitAll();
-//        return httpSecurity.build();
-//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         //cors
@@ -40,17 +34,9 @@ public class SecurityConfig {
         //csrf
         http.csrf(AbstractHttpConfigurer::disable);
 
-        //filter
-//        http.authorizeHttpRequests(req ->
-//                req
-//                        .requestMatchers("/signup","/login").permitAll()
-//                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
-//                        .requestMatchers("/employee/**").hasAuthority("Employee")
-//                        .anyRequest().authenticated()
-//        );
         http.authorizeHttpRequests(req ->
                 req
-                        .requestMatchers("/signup","/login","/changePassword").permitAll()
+                        .requestMatchers("/signup","/login").permitAll()
                         .anyRequest().authenticated()
         );
 

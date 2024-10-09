@@ -36,9 +36,6 @@ public class AdminController {
         return employeeService.getAllEmployees();
     }
 
-
-    //save attributes
-
     @PostMapping("/{id}/saveAttribute")
     public ResponseEntity<AttributeDTO> saveAttribute(@PathVariable("id") long id, @RequestBody AttributeDTO attributeDTO){
         AttributeDTO attributeDTO1 = employeeService.saveAttribute(id, attributeDTO);
@@ -47,10 +44,6 @@ public class AdminController {
 
 
 
-    @GetMapping("/search")
-    public List<EmployeeDetailsDTO> searchEmployee(@RequestParam("name") String s){
-       return employeeService.searchEmployees(s);
 
-    }
 
 }

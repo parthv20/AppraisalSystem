@@ -18,98 +18,106 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-
 public class TaskService {
 
-
-
-
-
     @Autowired
-    private  ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     @Autowired
-    private  AppraisalTaskRepository taskRepository;
+    private AppraisalTaskRepository taskRepository;
     @Autowired
-    private  EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
-
+    // Method to fetch and return all tasks in ascending order by ID
     public List<AppraisalTaskDTO> getTasks() {
-
-
+        // Fetch all tasks ordered by their ID
         List<AppraisalTask> tsk = taskRepository.findAllByOrderByIdAsc();
         List<AppraisalTaskDTO> appraisalTaskDTOS = new ArrayList<>();
 
-        for ( AppraisalTask task : tsk) {
+        // Map each AppraisalTask entity to a DTO and add to the list
+        for (AppraisalTask task : tsk) {
             AppraisalTaskDTO appraisalTaskDTO = this.modelMapper.map(task, AppraisalTaskDTO.class);
             appraisalTaskDTOS.add(appraisalTaskDTO);
         }
 
+        // Return the list of mapped DTOs
         return appraisalTaskDTOS;
     }
 
-    // cchng as used  in his project
+    // Method to delete a task by its ID
     public void deleteTasks(long id) {
-
-        Optional<AppraisalTask>  optionalTask= taskRepository.findById(id);
-        if(optionalTask.isPresent())
-        {
+        // Check if the task with the given ID exists
+        Optional<AppraisalTask> optionalTask = taskRepository.findById(id);
+        if (optionalTask.isPresent()) {
+            // If the task exists, delete it from the repository
             taskRepository.deleteById(id);
-//       Optional<AppraisalTask> apptask=taskRepository
         }
-
     }
 
+    // Method to save a task associated with an employee
     public AddTaskDTO saveTask(AppraisalTask task, long id) {
-        Optional<Employee> addtaskemployee= employeeRepository.findById(id);
+        // Find the employee by their ID
+        Optional<Employee> addtaskemployee = employeeRepository.findById(id);
 
-        if(addtaskemployee.isPresent()){
-            Employee emp= addtaskemployee.get();
+        // If the employee exists, associate the task with the employee and save it
+        if (addtaskemployee.isPresent()) {
+            Employee emp = addtaskemployee.get();
+            task.setEmployee(emp);  // Set the employee for the task
+            Set<AppraisalTask> tasks = emp.getTasks();  // Get the existing tasks of the employee
+            tasks.add(task);  // Add the new task
+            emp.setTasks(tasks);  // Update the employee's task set
 
-            task.setEmployee(emp);
-            Set<AppraisalTask> tasks  = emp.getTasks();
-            tasks.add(task);
-            emp.setTasks(tasks);
+            // Save the updated employee and return the mapped task DTO
             Employee savedEmployee = employeeRepository.save(emp);
-
-            return modelMapper.map(task,AddTaskDTO.class);
+            return modelMapper.map(task, AddTaskDTO.class);
         } else {
+            // Throw an exception if the employee is not found
             throw new EntityNotFoundException("Employee not found with id: " + id);
         }
     }
 
+    // Method to update an existing task with new details
     public AppraisalTaskDTO updateTasks(long id, AppraisalTaskDTO appraisalTaskDTO) throws Exception {
+        // Find the task by its ID
         Optional<AppraisalTask> optionalTask = taskRepository.findById(id);
-        System.out.println(id);
-        if(optionalTask.isPresent()){
+
+        // If the task exists, update the relevant fields with the provided data
+        if (optionalTask.isPresent()) {
             AppraisalTask task = optionalTask.get();
-            if(Objects.nonNull(appraisalTaskDTO.getName()) && !"".equalsIgnoreCase(task.getName())){
+
+            // Update the task's name if it is provided
+            if (Objects.nonNull(appraisalTaskDTO.getName()) && !"".equalsIgnoreCase(task.getName())) {
                 task.setName(appraisalTaskDTO.getName());
             }
 
-            if(Objects.nonNull(appraisalTaskDTO.getDescription()) && !"".equalsIgnoreCase(appraisalTaskDTO.getDescription())){
+            // Update the task's description if it is provided
+            if (Objects.nonNull(appraisalTaskDTO.getDescription()) && !"".equalsIgnoreCase(appraisalTaskDTO.getDescription())) {
                 task.setDescription(appraisalTaskDTO.getDescription());
             }
 
-            if(Objects.nonNull(appraisalTaskDTO.getStartDate())){
+            // Update the task's start date if it is provided
+            if (Objects.nonNull(appraisalTaskDTO.getStartDate())) {
                 task.setStartDate(appraisalTaskDTO.getStartDate());
             }
 
-            if(Objects.nonNull(appraisalTaskDTO.getEndDate())){
+            // Update the task's end date if it is provided
+            if (Objects.nonNull(appraisalTaskDTO.getEndDate())) {
                 task.setEndDate(appraisalTaskDTO.getEndDate());
             }
 
+            // Update the appraisable flag
             task.setAppraisable(appraisalTaskDTO.isAppraisable());
 
-            System.out.println(appraisalTaskDTO.getName());
+            // Update the admin rating
             task.setAdminrating(appraisalTaskDTO.getAdminrating());
+
+            // Save the updated task to the repository
             AppraisalTask updatedTask = taskRepository.save(task);
 
+            // Return the updated task as a DTO
             return modelMapper.map(updatedTask, AppraisalTaskDTO.class);
-
-        }
-        else {
+        } else {
+            // Throw an exception if the task is not found
             throw new Exception("Task not found with id: " + id);
         }
     }
 }
-

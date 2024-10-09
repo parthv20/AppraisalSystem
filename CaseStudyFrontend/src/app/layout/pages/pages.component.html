@@ -2,11 +2,11 @@
     <div class="task-container">
         <!-- Add Projects Button -->
          <div class="btns">
-            <button class="btn-primary" (click)="createtask()" [disabled]="user().notifyByemployee"> Add Projects </button>
+            <button class="btn-primary" (click)="createtask()" [disabled]="ntf()"> Add Projects </button>
         
             <!-- Conditional Notification Buttons -->
              <div class="ntfy">
-                <ng-container *ngIf="user().notifyByemployee; else elseNotify">
+                <ng-container *ngIf="ntf(); else elseNotify">
                 <button class="btn-primary" disabled> Notified, You can't </button>
                 </ng-container>
                 <ng-template #elseNotify>
@@ -27,10 +27,16 @@
       
         <!-- Task List -->
         <div class="task-list">
-            @for (task of user().tasks; track $index) {
-          <ng-container >
-            <app-employee-tasks [task]="task"></app-employee-tasks>
-          </ng-container>}
+            <ng-container *ngIf="user().notifyByemployee; else elsentf">
+                @for (task of user().tasks; track $index) {
+                    <app-employee-tasks [task]="task"  ></app-employee-tasks>
+                }
+            </ng-container>
+            <ng-template #elsentf>
+                @for (task of user().tasks; track $index) {
+                    <app-employee-tasks [task]="task" ></app-employee-tasks>
+                }
+            </ng-template>
         </div>
       </div>
       

@@ -5,6 +5,7 @@ import { PageService } from './page.service';
 import { EmployeelistComponent } from "./employeelist/employeelist.component";
 import { CreatetaskComponent } from "./createtask/createtask.component";
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pages',
@@ -18,6 +19,8 @@ export class PagesComponent implements OnInit {
   user = signal<any>(0)
   create = false;
   admin:boolean = false;
+  ntf = signal<boolean>(false)
+  router = inject(Router)
 
   ngOnInit(): void {
     const ad = localStorage.getItem('admin')
@@ -25,18 +28,23 @@ export class PagesComponent implements OnInit {
       this.admin = JSON.parse(ad);
     }
     this.getuser()
+
   }
 
   getuser(){
     this.pageservice.getuser().subscribe(data=>{
       this.user.set(data);
-      console.log(this.user())
+      if(this.user().notifyByemployee){
+        this.ntf.set(true)
+      }
     })
   }
- notify(){
-   this.user().notifybyemployee = true
-   this.pageservice.notify(this.user()).subscribe()
 
+ notify(){
+   this.ntf.set(true)
+   this.user().notifyByemployee = true
+   this.getuser()
+   this.pageservice.notify(this.user()).subscribe()
  }
   closecreate(task:any){
     if(task){

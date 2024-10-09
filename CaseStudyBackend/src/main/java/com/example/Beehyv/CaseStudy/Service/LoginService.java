@@ -29,23 +29,32 @@ public class LoginService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // Method to validate login credentials and return login response
     public LoginResponseDTO checkValidation(LoginDTO loginDTO) {
-        String email = loginDTO.getEmail();
-        String password = loginDTO.getPassword();
-        System.out.println(email + "  " + password);
+        String email = loginDTO.getEmail();  // Extract email from the login DTO
+        String password = loginDTO.getPassword();  // Extract password from the login DTO
+        System.out.println(email + "  " + password);  // Logging email and password for debugging
+
+        // Create an authentication token with the provided email and password
         var authToken = new UsernamePasswordAuthenticationToken(email, password);
+
+        // Authenticate the token using the authentication manager
         var authenticate = authenticationManager.authenticate(authToken);
 
+        // Fetch employee details based on the authenticated email
         Optional<Employee> employees = employeeRepository.findByEmail(authenticate.getName());
-        if(employees.isPresent()){
+
+        // If employee exists, map the employee to a LoginResponseDTO and set success response
+        if (employees.isPresent()) {
             Employee emp = employees.get();
-            LoginResponseDTO loginResponseDTO = modelMapper.map(emp, LoginResponseDTO.class);
-            loginResponseDTO.setMessage("success");;
-            loginResponseDTO.setStatus((long) HttpStatus.FOUND.value());
-            loginResponseDTO.setToken(JwtUtils.generateToken(authenticate.getName()));
-            return loginResponseDTO;
+            LoginResponseDTO loginResponseDTO = modelMapper.map(emp, LoginResponseDTO.class);  // Convert Employee to LoginResponseDTO
+            loginResponseDTO.setMessage("success");  // Set success message
+            loginResponseDTO.setStatus((long) HttpStatus.FOUND.value());  // Set HTTP status code
+            loginResponseDTO.setToken(JwtUtils.generateToken(authenticate.getName()));  // Generate JWT token for authenticated user
+            return loginResponseDTO;  // Return the response DTO
         }
-        else{
+        else {
+            // If employee is not found, throw an exception
             throw new EntityNotFoundException("User Not Found");
         }
     }

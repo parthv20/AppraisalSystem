@@ -28,17 +28,21 @@ export class NavbarComponent implements OnInit {
   sidebar = false;
   notification = signal<boolean>(false);
   ntfs = signal<boolean>(false);
+  len = signal<number>(0)
 
   ngOnInit(): void {
-      this.pageservice.getuser().subscribe(data=> this.user.set(data))
+    this.pageservice.getnotifications().subscribe(data=>this.len.set(data.length))
+    this.pageservice.getuser().subscribe(data=> this.user.set(data))
   }
 
   seenotifications(){
     this.ntfs.set(true);
+    this.pageservice.getnotifications().subscribe(data=>this.len.set(data.length))
   }
 
   closentfs() {
     this.ntfs.set(false);
+    this.pageservice.getnotifications().subscribe(data=>this.len.set(data.length))
   }
 
   logout() {
