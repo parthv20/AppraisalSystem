@@ -3,6 +3,7 @@ import { PageService } from '../page.service';
 import { DatePipe } from '@angular/common';
 import { CreatetaskComponent } from '../createtask/createtask.component';
 import { EdittaskComponent } from '../edittask/edittask.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-tasks',
@@ -17,9 +18,17 @@ export class EmployeeTasksComponent implements OnInit {
   edit = false;
   user = signal<any>('')
   deleted = signal<boolean>(false)
+  private router = inject(Router)
 
   ngOnInit(): void {
-      this.pageservice.getuser().subscribe(data=>this.user.set(data))
+    this.pageservice.getuser()?.subscribe({
+      next:(data) => {
+        this.user.set(data);
+      },
+      error:(err)=>{
+        this.router.navigateByUrl('/login')
+      }
+  });
   }
 
   onedit() {

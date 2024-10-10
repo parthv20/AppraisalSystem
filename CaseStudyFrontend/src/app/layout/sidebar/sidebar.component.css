@@ -1,31 +1,57 @@
 .sidebar {
-    width: 250px;
-    background-color: #2c3e50; 
-    color: white; 
-    padding: 20px;
-    border-radius: 8px; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
-    height: 87vh;
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  height: 87vh;
 }
 
 .sidebar button {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    background-color: #3b4957; 
-    color: white; 
-    border: none;
-    border-radius: 5px; 
-    cursor: pointer;
-    transition: background-color 0.3s; 
-    font-size: 16px; 
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #3b4957;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
 }
 
 .sidebar button:hover {
-    background-color: #1abc9c; 
-    transform: scale(1.05); 
+  background-color: #1abc9c;
+  transform: scale(1.05);
 }
 
 .sidebar button:focus {
-    outline: none; 
+  outline: none;
+}
+
+.side {
+  background-color: blue;
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+  position: fixed;
+}
+
+.showside {
+  display: none;
+  position: fixed;
+  top: 30px;
+  left: 26px;
+  z-index: 100;
+}
+
+@media screen and (max-width: 1500px) {
+  .sidebar {
+    /* display: none; */
+    z-index: 1000;
+  }
+  .showside {
+    display: block;
+  }
 }

@@ -1,27 +1,28 @@
 <div class="card">
-    <div class="card-header">
-      <h5 class="card-title">About</h5>
-    </div>
-    <div class="card-body">
-      <ul class="list-group">
-        <li class="list-group-item">
-          <span class="fw-bold">Name:</span> {{ user().name }}
-        </li>
-        <li class="list-group-item">
-          <span class="fw-bold">Designation:</span> {{ user().designation }}
-        </li>
-        <li class="list-group-item">
-          <span class="fw-bold">Joining Date:</span> {{ user().joiningDate  }}
-        </li>
-        <li class="list-group-item">
-          <span class="fw-bold">Mobile:</span> {{ user().phoneNumber }}
-        </li>
-        <li class="list-group-item">
-          <span class="fw-bold">Tenure:</span> {{ user().tenure }}
-        </li>
-        <li class="list-group-item">
-          <span class="fw-bold">Email:</span> <a href="mailto:{{ user().email }}">{{ user().email }}</a>
-        </li>
-      </ul>
-    </div>
+  <div class="card-header">
+    <h5 class="card-title">About</h5>
   </div>
+  <div class="card-body">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="fw-bold">Name:</span> {{ user().name }}
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Designation:</span> {{ user().designation }}
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Joining Date:</span> {{ user().hjkhdateOfJoining }}
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Mobile:</span> {{ user().phoneNumber }}
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Tenure:</span> {{ user().tenure }}
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Email:</span>
+        <a href="mailto:{{ user().email }}">{{ user().email }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

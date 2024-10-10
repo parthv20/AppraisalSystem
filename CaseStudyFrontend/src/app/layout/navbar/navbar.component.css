@@ -37,11 +37,11 @@
   gap: 20px; /* Adds space between the notification and logout buttons */
 }
 
-.notification-btn img, .logout-btn img {
+.notification-btn img,
+.logout-btn img {
   height: 35px;
   width: 35px;
   cursor: pointer;
-
 }
 
 button {
@@ -71,22 +71,28 @@ app-notification {
 }
 
 .dot {
-  width: 20px;         
-  height: 20px;       
-  background-color: #3498db; 
-  border-radius: 50%;  
-  display: inline-block; 
+  width: 20px;
+  height: 20px;
+  background-color: #3498db;
+  border-radius: 50%;
+  display: inline-block;
 }
 .success-message {
-  background-color: #28a745; 
-  color: white;               
-  border-radius: 5px;        
-  padding: 10px 15px;       
-  font-size: 16px;           
-  display: flex;            
-   align-items: center;       
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
 }
 .notification-message {
   margin-left: 100px; /* Space between logo and message */
 }
 
+@media screen and (max-width: 1500px) {
+  .logo {
+    position: absolute;
+    left: 60px;
+  }
+}

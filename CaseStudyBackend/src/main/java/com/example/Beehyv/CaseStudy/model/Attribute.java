@@ -15,15 +15,6 @@ public class Attribute {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    private String name;
-//    private String description;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "designation_id")
-//    private Designation designation;
-//
-//    private int adminRating;
-
     private long behaviour=0;
     private long CodeReadability=0;
     private long communication=0;

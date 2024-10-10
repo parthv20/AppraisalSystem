@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, inject, input, signal } from '@angular
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageService } from '../page.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createtask',
@@ -23,9 +24,17 @@ export class CreatetaskComponent {
     "appraisable": false
   })
   private subscription: Subscription | undefined;
+  private router = inject(Router)
 
   ngOnInit(): void {
-    this.pageservice.getuser().subscribe(data=>this.user.set(data))
+    this.pageservice.getuser()?.subscribe({
+      next:(data) => {
+        this.user.set(data);
+      },
+      error:(err)=>{
+        this.router.navigateByUrl('/login')
+      }
+  });
   }
 
   submittask() {

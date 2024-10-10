@@ -23,14 +23,9 @@ export const routes: Routes = [
     path:'signup',
     component: SignupComponent,
    },{
-    path:'layout',
+    path:'',
     component: LayoutComponent,
     children:[
-        {
-            path:'',
-            redirectTo :'dashboard',
-            pathMatch: 'full'
-        },
         
         { 
             path: 'dashboard',

@@ -26,7 +26,7 @@ export class LoginComponent {
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
-      this.router.navigateByUrl('/layout');
+      this.router.navigateByUrl('/dashboard');
     }
   }
   onlogin() {
@@ -35,7 +35,7 @@ export class LoginComponent {
         localStorage.setItem('token', JSON.stringify(data.token));
         localStorage.setItem('id',JSON.stringify(data.id));
         localStorage.setItem('admin',JSON.stringify(data.admin));
-        this.router.navigateByUrl('/layout');
+        this.router.navigateByUrl('/dashboard');
       },
       (error) => {
         this.invalid.set(true);
