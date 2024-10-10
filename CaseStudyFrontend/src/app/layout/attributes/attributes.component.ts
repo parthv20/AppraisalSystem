@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PageService } from '../pages/page.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { User } from '../../layout';
 
 @Component({
   selector: 'app-attributes',
@@ -12,11 +13,22 @@ import { CommonModule } from '@angular/common';
   styleUrl: './attributes.component.css',
 })
 export class AttributesComponent implements OnInit {
-  user = signal<any>(0);
+  user = signal<User[]>([]);
   pageservice = inject(PageService);
   route = inject(ActivatedRoute);
   id = 1;
-  attributes: any[] = [];
+  attributes = [
+    'behaviour',
+    'communication',
+    'java',
+    'angular',
+    'python',
+    'react',
+    'codeReadability',
+    'timeManagement',
+    'teamPlayer',
+    'efficiency',
+  ];
   router = inject(Router);
 
   submitratings() {
@@ -40,8 +52,7 @@ export class AttributesComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.id = Number(params.get('id'));
       this.pageservice.getallusers().subscribe((data) => {
-        this.user.set(data.filter((d: any) => d.id === this.id));
-        this.attributes = Object.keys(this.user()[0].attributes);
+        this.user.set(data.filter((d: User) => d.id === this.id));
       });
     });
   }

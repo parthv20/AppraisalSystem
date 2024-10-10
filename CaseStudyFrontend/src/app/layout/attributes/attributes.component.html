@@ -1,15 +1,34 @@
+<h2 style="width: 100%; text-align: center; padding: 40px">Rate Attributes</h2>
 
-<h2 style="width: 100%;text-align: center; padding:40px">Rate Attributes</h2>
-
-<div class="rating-container" style="display: flex; flex-direction: column; align-items: center;">
-<div *ngFor="let attribute of attributes; let i = index" class="rating-item" style="width:40%;display:flex; border: solid black 1px;padding: 5px;" >
-      <label class="rating-label" style="font-size: 30px;">{{ attribute }}</label>
-      <div style="display: flex; justify-content: right ;width: 100%;">
-
-          <input type="number" min="1" max="10" [(ngModel)]="user()[0].attributes[attribute]" class="rating-input" style="width: 180px; font-size: 30px;"  [disabled]="user()[0].noifybyadmin">
-      </div>
-      <br/>
+<div
+  class="rating-container"
+  style="display: flex; flex-direction: column; align-items: center"
+>
+  <div
+    *ngFor="let attribute of attributes; let i = index"
+    class="rating-item"
+    style="width: 40%; display: flex; border: solid black 1px; padding: 5px"
+  >
+    <label class="rating-label" style="font-size: 30px">{{ attribute }}</label>
+    <div style="display: flex; justify-content: right; width: 100%">
+      <input
+        type="number"
+        min="1"
+        max="10"
+        [(ngModel)]="user()[0].attributes[attribute]"
+        class="rating-input"
+        style="width: 180px; font-size: 30px"
+        [disabled]="user()[0].noifybyadmin"
+      />
     </div>
-    <button [routerLink]="['/pages']" (click)="submitratings()" style="width: 40%;" class="btn btn-primary">Submit</button>
+    <br />
   </div>
-
+  <button
+    [routerLink]="['/pages']"
+    (click)="submitratings()"
+    style="width: 40%"
+    class="btn btn-primary"
+  >
+    Submit
+  </button>
+</div>

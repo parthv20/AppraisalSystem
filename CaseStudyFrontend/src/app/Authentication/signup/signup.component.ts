@@ -3,37 +3,36 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PageService } from '../../layout/pages/page.service';
+import { Signuupuser } from '../../layout';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,RouterLink,FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, FormsModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrl: './signup.component.css',
 })
-export class SignupComponent{
-    user= signal<any>({
-      name:'',
-      email:'',
-      password:'',
-      designation:'',
-      dateOfJoining:'',
-      phoneNumber:'',
-    })
-    pageservice=inject(PageService)
+export class SignupComponent {
+  user = signal<Signuupuser>({
+    name: '',
+    email: '',
+    password: '',
+    designation: '',
+    dateOfJoining: '',
+    phoneNumber: '',
+  });
+  pageservice = inject(PageService);
 
-    onSubmit(){
-      console.log(this.user())
-       this.pageservice.signupuser(this.user()).subscribe({
-        next:res=>alert('Success'),
-        error:err=>{
-          if(err){
-            alert('error in submitting, please fill it correctly');
-            console.log(err)
-          }
-        },
-        
-
-    })
-    }
+  onSubmit() {
+    console.log(this.user());
+    this.pageservice.signupuser(this.user()).subscribe({
+      next: (res) => alert('Success'),
+      error: (err) => {
+        if (err) {
+          alert('error in submitting, please fill it correctly');
+          console.log(err);
+        }
+      },
+    });
+  }
 }

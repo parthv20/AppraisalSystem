@@ -6,6 +6,7 @@ import { EmployeelistComponent } from './employeelist/employeelist.component';
 import { CreatetaskComponent } from './createtask/createtask.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Task, User } from '../../layout';
 
 @Component({
   selector: 'app-pages',
@@ -21,7 +22,19 @@ import { Router } from '@angular/router';
 })
 export class PagesComponent implements OnInit {
   pageservice = inject(PageService);
-  user = signal<any>(0);
+  user = signal<User>({
+    attributes: {},
+    dateOfJoining: '',
+    designation: '',
+    email: '',
+    id: 0,
+    name: '',
+    noifybyadmin: false,
+    notifyByemployee: false,
+    phoneNumber: '',
+    tasks: [],
+    tenure: 0,
+  });
   create = false;
   admin: boolean = false;
   ntf = signal<boolean>(false);
@@ -64,7 +77,7 @@ export class PagesComponent implements OnInit {
     this.getuser();
     this.pageservice.notify(this.user()).subscribe();
   }
-  closecreate(task: any) {
+  closecreate(task: Task) {
     if (task) {
       this.user().tasks = [...this.user().tasks, task];
     }
@@ -72,9 +85,6 @@ export class PagesComponent implements OnInit {
   }
 
   createtask() {
-    // if (this.user().tenure < 12) {
-    //   alert("You can't add projects");
-    // } else {
     this.create = true;
   }
 }

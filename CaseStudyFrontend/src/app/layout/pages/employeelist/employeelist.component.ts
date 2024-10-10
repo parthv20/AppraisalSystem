@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { PageService } from '../page.service';
 import { Router, RouterLink } from '@angular/router';
+import { User } from '../../../layout';
 
 @Component({
   selector: 'app-employeelist',
@@ -10,7 +11,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './employeelist.component.css',
 })
 export class EmployeelistComponent implements OnInit {
-  users = signal<any>(0);
+  users = signal<User[]>([]);
   pageservice = inject(PageService);
   router = inject(Router);
   loading = signal<boolean>(false);
@@ -29,7 +30,7 @@ export class EmployeelistComponent implements OnInit {
     }
     this.pageservice.getallusers().subscribe({
       next: (data) => {
-        this.users.set(data.filter((usr: any) => usr.tenure >= 12));
+        this.users.set(data.filter((usr: User) => usr.tenure >= 12));
         console.log(this.users());
       },
       complete: () => this.loading.set(false),

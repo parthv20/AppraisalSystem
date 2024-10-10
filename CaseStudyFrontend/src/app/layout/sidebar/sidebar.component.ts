@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { PageService } from '../pages/page.service';
 import { RouterLink } from '@angular/router';
+import { User } from '../../layout';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +11,19 @@ import { RouterLink } from '@angular/router';
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent implements OnInit {
-  user = signal<any>(0);
+  user = signal<User>({
+    attributes: {},
+    dateOfJoining: '',
+    designation: '',
+    email: '',
+    id: 0,
+    name: '',
+    noifybyadmin: false,
+    notifyByemployee: false,
+    phoneNumber: '',
+    tasks: [],
+    tenure: 0,
+  });
   pageservice = inject(PageService);
   sidebar = signal<boolean>(false);
   clicked = signal<boolean>(false);

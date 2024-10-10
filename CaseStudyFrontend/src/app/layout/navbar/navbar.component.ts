@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 import { NotificationComponent } from '../notification/notification.component';
 import { CommonModule } from '@angular/common';
 import { PageService } from '../pages/page.service';
+import { User } from '../../layout';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +22,19 @@ import { PageService } from '../pages/page.service';
 })
 export class NavbarComponent implements OnInit {
   // username = 'input<string>();'
-  user = signal<any>({});
+  user = signal<User>({
+    attributes: {},
+    dateOfJoining: '',
+    designation: '',
+    email: '',
+    id: 0,
+    name: '',
+    noifybyadmin: false,
+    notifyByemployee: false,
+    phoneNumber: '',
+    tasks: [],
+    tenure: 0,
+  });
   pageservice = inject(PageService);
   options = signal(false);
   sidebar = false;
